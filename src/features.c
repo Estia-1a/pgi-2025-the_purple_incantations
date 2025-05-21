@@ -12,5 +12,8 @@
  */
 
 void helloWorld() {
-    printf("Hello World !");
+    printf("Salut les copaings");
+}
+void helloWorld2() {
+    printf("Egun on");
 }
