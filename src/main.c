@@ -31,10 +31,6 @@ int main(int argc, char **argv) {
     /* helloworld() function is defined in feature.h and implemented in feature.c */
     helloWorld();
   }
-  if ( strncmp( configuration.command, "helloworld2", 11 ) == 0 ) {
-    /* helloworld() function is defined in feature.h and implemented in feature.c */
-    helloWorld2();
-  }
   /*
    * TO COMPLETE
    */

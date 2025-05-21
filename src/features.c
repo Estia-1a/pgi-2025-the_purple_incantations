@@ -14,6 +14,3 @@
 void helloWorld() {
     printf("Salut les copaings");
 }
-void helloWorld2() {
-    printf("Egun on");
-}

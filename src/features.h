@@ -3,6 +3,6 @@
 
 
 void helloWorld();
-void helloWorld2();
+void dimension (char *source_path);
 
 #endif
