@@ -1,0 +1,4 @@
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c: In function ‘print_pixel’:
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:99:5: warning: ignoring return value of ‘scanf’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   99 |     scanf("%d,%d",&x,&y);
+      |     ^~~~~~~~~~~~~~~~~~~~
