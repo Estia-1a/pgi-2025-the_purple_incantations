@@ -110,3 +110,34 @@ void print_pixel (char *source_path){
     }
 }
 
+void max_pixel(char *source_path) {
+    int width, height, channel_count;
+    unsigned char *data;
+
+    int result = read_image_data(source_path, &data, &width, &height, &channel_count);
+    
+    
+    int max_sum = -1;
+    int max_index = 0;
+
+    for (int i = 0; i < width * height; i++) {
+        int r = data[i * channel_count];
+        int g = data[i * channel_count + 1];
+        int b = data[i * channel_count + 2];
+        int sum = r + g + b;
+
+        if (sum > max_sum) {
+            max_sum = sum;
+            max_index = i;
+        }
+    }
+
+    int r = data[max_index * channel_count];
+    int g = data[max_index * channel_count + 1];
+    int b = data[max_index * channel_count + 2];
+
+    int x = max_index % width;
+    int y = max_index / width;
+
+    printf("max_pixel (%d, %d): %d, %d, %d\n", x, y, r, g, b);
+}
