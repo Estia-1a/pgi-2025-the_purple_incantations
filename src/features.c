@@ -88,9 +88,27 @@ void second_line (char *source_path){
     }
 }
 
-
-
-/*rotation sens horaire
+void print_pixel (char *source_path){
+    int r,g,b,x,p,y;
+    int width;
+    int height;
+    int channel_count;
+    unsigned char *data;
+    int resultat = read_image_data(source_path, &data, &width, &height, &channel_count);
+    scanf("%d %d",&x,&y);
+    
+    if (resultat && x<(width+1) && y<(height+1)) { 
+        p=(width*(y-1))+x;
+        r=(p-1)*3;
+        g=r+1;
+        b=g+1;
+    printf("print_pixel (%d, %d): %d, %d, %d",x,y,data[r],data[g],data[b]);
+    }
+    else {
+      printf("NULL");  
+    }
+}
+/*rotation sens horaire*/
 void rotate_cw(char *source_path){
     unsigned char *datasrc = NULL;
     int width=0, height =0, channel_count=0;
@@ -105,4 +123,4 @@ void rotate_cw(char *source_path){
     }
     write_image_data("./images/input/image_rotatecw_out.bmp", datadest, width, height);
     free(datadest);
-}*/
+}
