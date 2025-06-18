@@ -59,7 +59,7 @@ void tenth_pixel (char *source_path){
         r=(p-1)*3;
         g=r+1;
         b=g+1;
-    printf("tenth pixel: %d, %d, %d",data[r],data[g],data[b]);
+    printf("tenth_pixel: %d, %d, %d\n",data[r],data[g],data[b]);
     }
     else {
       printf("ERROR!!!!!!");  
@@ -115,7 +115,7 @@ void max_pixel(char *source_path) {
     unsigned char *data;
 
     int result = read_image_data(source_path, &data, &width, &height, &channel_count);
-    
+    (void)result; 
     
     int max_sum = -1;
     int max_index = 0;
@@ -139,5 +139,40 @@ void max_pixel(char *source_path) {
     int x = max_index % width;
     int y = max_index / width;
 
-    printf("max_pixel (%d, %d): %d, %d, %d\n", x, y, r, g, b);
+    printf("max_pixel (%d, %d): %d, %d, %d", x, y, r, g, b);
+}
+
+void min_pixel(char *source_path) {
+    int width, height, channel_count;
+    unsigned char *data;
+
+    int result = read_image_data(source_path, &data, &width, &height, &channel_count);
+    if (result != 0) {
+        printf("ERROR!!!!!!");
+        return;
+    }
+
+    int min_sum = 255 * 3 + 1; // Plus grande somme possible + 1
+    int min_index = 0;
+
+    for (int i = 0; i < width * height; i++) {
+        int r = data[i * channel_count];
+        int g = data[i * channel_count + 1];
+        int b = data[i * channel_count + 2];
+        int sum = r + g + b;
+
+        if (sum < min_sum) {
+            min_sum = sum;
+            min_index = i;
+        }
+    }
+
+    int r = data[min_index * channel_count];
+    int g = data[min_index * channel_count + 1];
+    int b = data[min_index * channel_count + 2];
+
+    int x = min_index % width;
+    int y = min_index / width;
+
+    printf("min_pixel (%d, %d): %d, %d, %d", x, y, r, g, b);
 }
