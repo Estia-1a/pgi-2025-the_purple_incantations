@@ -239,3 +239,72 @@ void rotate_cw(char *source_path){
     write_image_data("./images/input/image_rotatecw_out.bmp", datadest, width, height);
     free(datadest);
 }*/
+
+void max_pixel(char *image_path) {
+    unsigned char *image = NULL;   
+    int width = 0, height = 0, channels = 0; 
+
+    read_image_data(image_path, &image, &width, &height, &channels);
+
+    int max_sum = -1;
+    int pixel_x = 0, pixel_y = 0;
+    unsigned char max_r = 0, max_g = 0, max_b = 0;
+
+    
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int i = (y * width + x) * channels;
+
+            unsigned char r = image[i];
+            unsigned char g = image[i + 1];
+            unsigned char b = image[i + 2];
+ 
+            int sum = r + g + b;
+
+            if (sum > max_sum) {
+                max_sum = sum;
+                pixel_x = x;
+                pixel_y = y;
+                max_r = r;
+                max_g = g;
+                max_b = b;
+            }
+        }
+    }
+
+    printf("max_pixel (%d, %d): %d, %d, %d\n", pixel_x, pixel_y, max_r, max_g, max_b);
+}
+
+void min_pixel(char *image_path) {
+    unsigned char *image = NULL;
+    int width = 0, height = 0, channels = 0;
+
+    read_image_data(image_path, &image, &width, &height, &channels);
+
+    int min_sum = 255 * 3 + 1;
+    int pixel_x = 0, pixel_y = 0;
+    unsigned char min_r = 0, min_g = 0, min_b = 0;
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int i = (y * width + x) * channels;
+
+            unsigned char r = image[i];
+            unsigned char g = image[i + 1];
+            unsigned char b = image[i + 2];
+
+            int sum = r + g + b; 
+
+            if (sum < min_sum) {
+                min_sum = sum;
+                pixel_x = x;
+                pixel_y = y;
+                min_r = r;
+                min_g = g;
+                min_b = b;
+            }
+        }
+    }
+
+    printf("min_pixel (%d, %d): %d, %d, %d\n", pixel_x, pixel_y, min_r, min_g, min_b);
+}
