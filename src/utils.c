@@ -16,7 +16,7 @@ pixelRGB* get_pixel( unsigned char* data, const unsigned int width, const unsign
     }
 }
 
-void print_pixel(char *filename, int x, int y) {
+void print_pixel(char * filename, int x, int y) {
     int width;
     int height;
     int channel_count;
@@ -31,4 +31,17 @@ void print_pixel(char *filename, int x, int y) {
 
    printf("print_pixel (%d, %d): %d, %d, %d\n", x, y, pixel->R, pixel->G, pixel->B);
    free_image_data(data);
+}
+void set_pixel(unsigned char* data, const unsigned int width, const unsigned int height, const unsigned int n,
+               const unsigned int x, const unsigned int y, pixelRGB* pixel)
+{
+    if (!data || !pixel || x >= width || y >= height || n < 3) {
+        return; 
+    }
+
+    unsigned int index = (y * width + x) * n;
+
+    data[index]     = pixel->R;
+    data[index + 1] = pixel->G;
+    data[index + 2] = pixel->B;
 }
