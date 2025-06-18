@@ -108,4 +108,19 @@ void print_pixel (char *source_path){
       printf("NULL");  
     }
 }
-
+/*rotation sens horaire*/
+void rotate_cw(char *source_path){
+    unsigned char *datasrc = NULL;
+    int width=0, height =0, channel_count=0;
+    int x,y ;
+    read_image_data(source_path, &datasrc, &width, &height, &channel_count);
+    unsigned char *datadest= malloc(height*width*channel_count*sizeof(unsigned char));
+ 
+    for (x=0;x<height;x++){
+        for (y=0;y<width;y++){
+           datadest= set_pixel(datadest, width, height, channel_count, width-1-y, x, datasrc, x, y);
+        }
+    }
+    write_image_data("./images/input/image_rotatecw_out.bmp", datadest, width, height);
+    free(datadest);
+}
