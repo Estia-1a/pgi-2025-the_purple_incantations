@@ -48,7 +48,11 @@ int main(int argc, char **argv) {
   }
 
   if ( strncmp( configuration.command, "print_pixel", 11 ) == 0 ) {
-    print_pixel(configuration.filenames[0] );
+    print_pixel(configuration.filenames[0],atoi(configuration.arguments[0]),atoi(configuration.arguments[1]));
+  }
+  if ( strncmp( configuration.command, "color_red", 9 ) == 0 ) {
+    color_red(configuration.filenames[0]);  
+
   }
   /*
    * TO COMPLETE
@@ -56,3 +60,5 @@ int main(int argc, char **argv) {
   
   return 0;
 }
+
+ 
