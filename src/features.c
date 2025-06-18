@@ -109,7 +109,7 @@ void print_pixel (char *source_path){
     }
 }
 /*rotation sens horaire*/
-void rotate_cw(char *source_path){
+/*void rotate_cw(char *source_path){
     unsigned char *datasrc = NULL;
     int width=0, height =0, channel_count=0;
     int x,y ;
@@ -122,5 +122,5 @@ void rotate_cw(char *source_path){
         }
     }
     write_image_data("./images/input/image_rotatecw_out.bmp", datadest, width, height);
-    free(datadest);
+    free(datadest);*/
 }
