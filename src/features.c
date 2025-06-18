@@ -1,6 +1,6 @@
 #include <estia-image.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 #include "features.h"
 #include "utils.h"
 
@@ -88,7 +88,9 @@ void second_line (char *source_path){
     }
 }
 
-/*
+
+
+/*rotation sens horaire
 void rotate_cw(char *source_path){
     unsigned char *datasrc = NULL;
     int width=0, height =0, channel_count=0;
@@ -97,37 +99,10 @@ void rotate_cw(char *source_path){
     unsigned char *datadest= malloc(height*width*channel_count*sizeof(unsigned char));
  
     for (x=0;x<height;x++){
-        for (y=0;y<width;y++){
-           datadest= set_pixel(datadest, width, height, channel_count, width-1-y, x, datasrc, x, y);
+        for (y=0; y<width; y++) {
+            set_pixel(datadest, height, width, channel_count, x, y, datasrc, y, width - 1 - x);
         }
     }
     write_image_data("./images/input/image_rotatecw_out.bmp", datadest, width, height);
     free(datadest);
-}*/
-void color_red(char *source_path) {
-    unsigned char *datasrc = NULL;
-    int width = 0, height = 0, channel_count = 0;
-
-    // Lecture de l'image
-    read_image_data(source_path, &datasrc, &width, &height, &channel_count);
-
-    if (datasrc == NULL || channel_count < 3) {
-        printf("Erreur : l'image n'a pas pu être lue correctement ou n'a pas assez de canaux.\n");
-        return;
-    }
-
-    // On modifie les données pour garder uniquement la composante rouge
-    int size = width * height * channel_count;
-    for (int i = 0; i < size; i += channel_count) {
-        // R = datasrc[i]
-        datasrc[i + 1] = 0; // G à 0
-        datasrc[i + 2] = 0; // B à 0
-    }
-
-    // Sauvegarde de l'image modifiée
-    write_image_data("./images/input/image_out.bmp", datasrc, width, height);
-
-    // Libération mémoire
-    free(datasrc);
 }
-
