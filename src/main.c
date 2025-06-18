@@ -51,9 +51,9 @@ int main(int argc, char **argv) {
     print_pixel(configuration.filenames[0],atoi(configuration.arguments[0]) , atoi(configuration.arguments[1]));
   }
   
-  if ( strncmp( configuration.command, "rotate_cw", 9 ) == 0 ) {
+  //if ( strncmp( configuration.command, "rotate_cw", 9 ) == 0 ) {
     //rotate_cw(configuration.filenames[0] );
-  }
+  //}
   
   if ( strncmp( configuration.command, "max_pixel", 9 ) == 0 ) {
     max_pixel(configuration.filenames[0] );

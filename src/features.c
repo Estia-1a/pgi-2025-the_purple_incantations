@@ -147,3 +147,4 @@ void max_pixel(char *image_path) {
     // Afficher le résultat
     printf("max_pixel (%d, %d): %d, %d, %d\n", pixel_x, pixel_y, max_r, max_g, max_b);
 }
+
