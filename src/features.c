@@ -106,33 +106,26 @@ void second_line (char *source_path){
 }*/
 
 void max_pixel(char *image_path) {
-    // Déclaration des variables
-    unsigned char *image = NULL;   // Contiendra les données de l'image
-    int width = 0, height = 0, channels = 0; // Dimensions et nombre de canaux (R, G, B)
+    unsigned char *image = NULL;   
+    int width = 0, height = 0, channels = 0; 
 
-    // Charger l'image
     read_image_data(image_path, &image, &width, &height, &channels);
 
-    // Variables pour garder le pixel avec la plus grande somme R+G+B
     int max_sum = -1;
     int pixel_x = 0, pixel_y = 0;
     unsigned char max_r = 0, max_g = 0, max_b = 0;
 
-    // Parcourir tous les pixels de l'image
+    
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            // Calcul de l'index du pixel dans le tableau
             int i = (y * width + x) * channels;
 
-            // Lire les 3 composantes du pixel
             unsigned char r = image[i];
             unsigned char g = image[i + 1];
             unsigned char b = image[i + 2];
-
-            // Calculer la somme R + G + B
+ 
             int sum = r + g + b;
 
-            // Si c'est plus grand que le max actuel, on le garde
             if (sum > max_sum) {
                 max_sum = sum;
                 pixel_x = x;
@@ -144,7 +137,39 @@ void max_pixel(char *image_path) {
         }
     }
 
-    // Afficher le résultat
     printf("max_pixel (%d, %d): %d, %d, %d\n", pixel_x, pixel_y, max_r, max_g, max_b);
 }
 
+void min_pixel(char *image_path) {
+    unsigned char *image = NULL;
+    int width = 0, height = 0, channels = 0;
+
+    read_image_data(image_path, &image, &width, &height, &channels);
+
+    int min_sum = 255 * 3 + 1;
+    int pixel_x = 0, pixel_y = 0;
+    unsigned char min_r = 0, min_g = 0, min_b = 0;
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int i = (y * width + x) * channels;
+
+            unsigned char r = image[i];
+            unsigned char g = image[i + 1];
+            unsigned char b = image[i + 2];
+
+            int sum = r + g + b; 
+
+            if (sum < min_sum) {
+                min_sum = sum;
+                pixel_x = x;
+                pixel_y = y;
+                min_r = r;
+                min_g = g;
+                min_b = b;
+            }
+        }
+    }
+
+    printf("min_pixel (%d, %d): %d, %d, %d\n", pixel_x, pixel_y, min_r, min_g, min_b);
+}
