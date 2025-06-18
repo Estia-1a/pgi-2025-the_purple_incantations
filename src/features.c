@@ -88,10 +88,8 @@ void second_line (char *source_path){
     }
 }
 
-
-
-/*rotation sens horaire
-void rotate_cw(char *source_path){
+/*rotation sens horaire*/
+/*void rotate_cw(char *source_path){
     unsigned char *datasrc = NULL;
     int width=0, height =0, channel_count=0;
     int x,y ;
@@ -105,4 +103,48 @@ void rotate_cw(char *source_path){
     }
     write_image_data("./images/input/image_rotatecw_out.bmp", datadest, width, height);
     free(datadest);
+}*/
+
+void max_pixel(char *image_path) {
+    // Déclaration des variables
+    unsigned char *image = NULL;   // Contiendra les données de l'image
+    int width = 0, height = 0, channels = 0; // Dimensions et nombre de canaux (R, G, B)
+
+    // Charger l'image
+    read_image_data(image_path, &image, &width, &height, &channels);
+
+    // Variables pour garder le pixel avec la plus grande somme R+G+B
+    int max_sum = -1;
+    int pixel_x = 0, pixel_y = 0;
+    unsigned char max_r = 0, max_g = 0, max_b = 0;
+
+    // Parcourir tous les pixels de l'image
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            // Calcul de l'index du pixel dans le tableau
+            int i = (y * width + x) * channels;
+
+            // Lire les 3 composantes du pixel
+            unsigned char r = image[i];
+            unsigned char g = image[i + 1];
+            unsigned char b = image[i + 2];
+
+            // Calculer la somme R + G + B
+            int sum = r + g + b;
+
+            // Si c'est plus grand que le max actuel, on le garde
+            if (sum > max_sum) {
+                max_sum = sum;
+                pixel_x = x;
+                pixel_y = y;
+                max_r = r;
+                max_g = g;
+                max_b = b;
+            }
+        }
+    }
+
+    // Afficher le résultat
+    printf("max_pixel (%d, %d): %d, %d, %d\n", pixel_x, pixel_y, max_r, max_g, max_b);
 }
+
