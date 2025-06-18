@@ -1,0 +1,42 @@
+In file included from /home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:5:
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/utils.h:19:6: error: conflicting types for ‘print_pixel’; have ‘void(char *, int,  int)’
+   19 | void print_pixel(char * filename, int x, int y);
+      |      ^~~~~~~~~~~
+In file included from /home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:4:
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.h:10:6: note: previous declaration of ‘print_pixel’ with type ‘void(char *)’
+   10 | void print_pixel(char *source_path);
+      |      ^~~~~~~~~~~
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c: In function ‘rotate_cw’:
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:121:69: warning: passing argument 7 of ‘set_pixel’ from incompatible pointer type [-Wincompatible-pointer-types]
+  121 |             set_pixel(datadest, height, width, channel_count, x, y, datasrc, y, width - 1 - x);
+      |                                                                     ^~~~~~~
+      |                                                                     |
+      |                                                                     unsigned char *
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/utils.h:20:167: note: expected ‘pixelRGB *’ {aka ‘struct _pixelRGB *’} but argument is of type ‘unsigned char *’
+   20 | void set_pixel( unsigned char* data, const unsigned int width, const unsigned int height, const unsigned int n, const unsigned int x, const unsigned int y, pixelRGB* pixel );
+      |                                                                                                                                                             ~~~~~~~~~~^~~~~
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:121:13: error: too many arguments to function ‘set_pixel’
+  121 |             set_pixel(datadest, height, width, channel_count, x, y, datasrc, y, width - 1 - x);
+      |             ^~~~~~~~~
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/utils.h:20:6: note: declared here
+   20 | void set_pixel( unsigned char* data, const unsigned int width, const unsigned int height, const unsigned int n, const unsigned int x, const unsigned int y, pixelRGB* pixel );
+      |      ^~~~~~~~~
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c: In function ‘print_pixel’:
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:98:5: warning: ignoring return value of ‘scanf’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   98 |     scanf("%d %d",&x,&y);
+      |     ^~~~~~~~~~~~~~~~~~~~
+In file included from /home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/main.c:9:
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/utils.h:19:6: error: conflicting types for ‘print_pixel’; have ‘void(char *, int,  int)’
+   19 | void print_pixel(char * filename, int x, int y);
+      |      ^~~~~~~~~~~
+In file included from /home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/main.c:8:
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.h:10:6: note: previous declaration of ‘print_pixel’ with type ‘void(char *)’
+   10 | void print_pixel(char *source_path);
+      |      ^~~~~~~~~~~
+gmake[2]: *** [CMakeFiles/freud.dir/build.make:93: CMakeFiles/freud.dir/src/features.c.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[2]: *** [CMakeFiles/freud.dir/build.make:107: CMakeFiles/freud.dir/src/main.c.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/freud.dir/all] Error 2
+gmake: *** [Makefile:136: all] Error 2
+
+The process '/usr/local/bin/cmake' failed with exit code 2
