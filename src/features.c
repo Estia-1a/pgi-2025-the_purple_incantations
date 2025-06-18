@@ -1,6 +1,6 @@
 #include <estia-image.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 #include "features.h"
 #include "utils.h"
 
@@ -108,6 +108,7 @@ void print_pixel (char *source_path){
       printf("NULL");  
     }
 }
+
 /*rotation sens horaire*/
 void rotate_cw(char *source_path){
     unsigned char *datasrc = NULL;
@@ -118,9 +119,44 @@ void rotate_cw(char *source_path){
  
     for (x=0;x<height;x++){
         for (y=0;y<width;y++){
-           datadest= set_pixel(datadest, width, height, channel_count, width-1-y, x, datasrc, x, y);
+           datadest=set_pixel(datadest, width, height, channel_count, width-1-y, x, datasrc, x, y);
         }
     }
     write_image_data("./images/input/image_rotatecw_out.bmp", datadest, width, height);
     free(datadest);
+}
+
+/*somme maximale pixel*/
+void max_pixel(char *source_path) {
+    unsigned char *image = NULL;
+    int width = 0, height = 0, channel_count = 0;
+
+    read_image_data(source_path, &image, &width, &height, &channel_count);
+
+    int max_sum = -1;
+    int best_x = 0, best_y = 0;
+    unsigned char r = 0, g = 0, b = 0;
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int i = (y * width + x) * channel_count;
+
+            unsigned char red = image[i];
+            unsigned char green = image[i + 1];
+            unsigned char blue = image[i + 2];
+
+            int sum = red + green + blue;
+
+            if (sum > max_sum) {
+                max_sum = sum;
+                best_x = x;
+                best_y = y;
+                r = red;
+                g = green;
+                b = blue;
+            }
+        }
+    }
+
+    printf("max_pixel (%d, %d): %d, %d, %d\n", best_x, best_y, r, g, b);
 }
