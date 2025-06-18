@@ -39,7 +39,7 @@ void first_pixel (char *source_path){
     int resultat = read_image_data(source_path, &data, &width, &height, &channel_count);
     
     if (resultat){ 
-    printf("first pixel: %d, %d, %d",data[0],data[1],data[2]);
+    printf("first_pixel: %d, %d, %d",data[0],data[1],data[2]);
     }
     else {
       printf("ERROR!!!!!!");  
@@ -59,7 +59,7 @@ void tenth_pixel (char *source_path){
         r=(p-1)*3;
         g=r+1;
         b=g+1;
-    printf("tenth pixel: %d, %d, %d",data[r],data[g],data[b]);
+    printf("tenth_pixel: %d, %d, %d",data[r],data[g],data[b]);
     }
     else {
       printf("ERROR!!!!!!");  
@@ -89,24 +89,23 @@ void second_line (char *source_path){
 }
 
 void print_pixel (char *source_path){
-    int r,g,b,x,y;
+    int r,g,b,x,p,y;
     int width;
     int height;
     int channel_count;
     unsigned char *data;
     int resultat = read_image_data(source_path, &data, &width, &height, &channel_count);
-    printf("Coordonnees du pixel x,y ");
-    scanf("%d,%d",&x,&y);
+    scanf("%d %d",&x,&y);
     
     if (resultat && x<(width+1) && y<(height+1)) { 
-        x=(width*(y-1))+x;
-        r=(x-1)*3;
+        p=(width*(y-1))+x;
+        r=(p-1)*3;
         g=r+1;
         b=g+1;
-    printf("pixel: %d, %d, %d",data[r],data[g],data[b]);
+    printf("print_pixel (%d, %d): %d, %d, %d",x,y,data[r],data[g],data[b]);
     }
     else {
-      printf("ERROR!!!!!!");  
+      printf("NULL");  
     }
 }
 
