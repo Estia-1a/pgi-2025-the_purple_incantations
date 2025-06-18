@@ -88,27 +88,7 @@ void second_line (char *source_path){
     }
 }
 
-void print_pixel (char *source_path){
-    int r,g,b,x,p,y;
-    int width;
-    int height;
-    int channel_count;
-    unsigned char *data;
-    int resultat = read_image_data(source_path, &data, &width, &height, &channel_count);
-    scanf("%d %d",&x,&y);
-    
-    if (resultat && x<(width+1) && y<(height+1)) { 
-        p=(width*(y-1))+x;
-        r=(p-1)*3;
-        g=r+1;
-        b=g+1;
-    printf("print_pixel (%d, %d): %d, %d, %d",x,y,data[r],data[g],data[b]);
-    }
-    else {
-      printf("NULL");  
-    }
-}
-/*rotation sens horaire*/
+/*
 void rotate_cw(char *source_path){
     unsigned char *datasrc = NULL;
     int width=0, height =0, channel_count=0;
@@ -123,4 +103,31 @@ void rotate_cw(char *source_path){
     }
     write_image_data("./images/input/image_rotatecw_out.bmp", datadest, width, height);
     free(datadest);
+}*/
+void color_red(char *source_path) {
+    unsigned char *datasrc = NULL;
+    int width = 0, height = 0, channel_count = 0;
+
+    // Lecture de l'image
+    read_image_data(source_path, &datasrc, &width, &height, &channel_count);
+
+    if (datasrc == NULL || channel_count < 3) {
+        printf("Erreur : l'image n'a pas pu être lue correctement ou n'a pas assez de canaux.\n");
+        return;
+    }
+
+    // On modifie les données pour garder uniquement la composante rouge
+    int size = width * height * channel_count;
+    for (int i = 0; i < size; i += channel_count) {
+        // R = datasrc[i]
+        datasrc[i + 1] = 0; // G à 0
+        datasrc[i + 2] = 0; // B à 0
+    }
+
+    // Sauvegarde de l'image modifiée
+    write_image_data("./images/input/image_out.bmp", datasrc, width, height);
+
+    // Libération mémoire
+    free(datasrc);
 }
+
