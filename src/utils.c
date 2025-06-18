@@ -16,7 +16,7 @@ pixelRGB* get_pixel( unsigned char* data, const unsigned int width, const unsign
     }
 }
 
-void print_pixel(char *filename, int x, int y) {
+void print_pixel(char * filename, int x, int y) {
     int width;
     int height;
     int channel_count;
