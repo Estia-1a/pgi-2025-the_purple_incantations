@@ -1,0 +1,37 @@
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c: In function ‘rotate_cw’:
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:117:30: warning: implicit declaration of function ‘malloc’ [-Wimplicit-function-declaration]
+  117 |     unsigned char *datadest= malloc(height*width*channel_count*sizeof(unsigned char));
+      |                              ^~~~~~
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:6:1: note: include ‘<stdlib.h>’ or provide a declaration of ‘malloc’
+    5 | #include "utils.h"
+  +++ |+#include <stdlib.h>
+    6 | 
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:117:30: warning: incompatible implicit declaration of built-in function ‘malloc’ [-Wbuiltin-declaration-mismatch]
+  117 |     unsigned char *datadest= malloc(height*width*channel_count*sizeof(unsigned char));
+      |                              ^~~~~~
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:117:30: note: include ‘<stdlib.h>’ or provide a declaration of ‘malloc’
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:121:22: warning: implicit declaration of function ‘set_pixel’; did you mean ‘tenth_pixel’? [-Wimplicit-function-declaration]
+  121 |            datadest= set_pixel(datadest, width, height, channel_count, width-1-y, x, datasrc, x, y);
+      |                      ^~~~~~~~~
+      |                      tenth_pixel
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:121:20: warning: assignment to ‘unsigned char *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+  121 |            datadest= set_pixel(datadest, width, height, channel_count, width-1-y, x, datasrc, x, y);
+      |                    ^
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:125:5: warning: implicit declaration of function ‘free’ [-Wimplicit-function-declaration]
+  125 |     free(datadest);
+      |     ^~~~
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:125:5: note: include ‘<stdlib.h>’ or provide a declaration of ‘free’
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:125:5: warning: incompatible implicit declaration of built-in function ‘free’ [-Wbuiltin-declaration-mismatch]
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:125:5: note: include ‘<stdlib.h>’ or provide a declaration of ‘free’
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c: In function ‘print_pixel’:
+/home/runner/work/pgi-2025-the_purple_incantations/pgi-2025-the_purple_incantations/src/features.c:98:5: warning: ignoring return value of ‘scanf’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   98 |     scanf("%d %d",&x,&y);
+      |     ^~~~~~~~~~~~~~~~~~~~
+/usr/bin/ld: CMakeFiles/freud.dir/src/features.c.o: in function `rotate_cw':
+features.c:(.text+0x432): undefined reference to `set_pixel'
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [CMakeFiles/freud.dir/build.make:151: freud] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/freud.dir/all] Error 2
+gmake: *** [Makefile:136: all] Error 2
+
+The process '/usr/local/bin/cmake' failed with exit code 2
