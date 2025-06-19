@@ -32,3 +32,15 @@ void print_pixel(char * filename, int x, int y) {
    printf("print_pixel (%d, %d): %d, %d, %d\n", x, y, pixel->R, pixel->G, pixel->B);
    free_image_data(data);
 }
+void set_pixel(unsigned char* data, const unsigned int width, const unsigned int height, const unsigned int n,
+               const unsigned int x, const unsigned int y, pixelRGB* pixel)
+{
+    if (x >= width || y >= height || data == NULL || pixel == NULL) {
+        return;
+    }
+
+    unsigned char* ptr = &data[(y * width + x) * n];
+    ptr[0] = pixel->R;
+    ptr[1] = pixel->G;
+    ptr[2] = pixel->B;
+}
