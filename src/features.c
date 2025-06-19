@@ -105,11 +105,11 @@ void second_line (char *source_path){
     free(datadest);
 }*/
 
-void max_pixel(char *image_path) {
+void max_pixel(char *source_path) {
     unsigned char *image = NULL;   
-    int width = 0, height = 0, channels = 0; 
+    int width = 0, height = 0, channel_count = 0; 
 
-    read_image_data(image_path, &image, &width, &height, &channels);
+    read_image_data(source_path, &image, &width, &height, &channel_count);
 
     int max_sum = -1;
     int pixel_x = 0, pixel_y = 0;
@@ -118,7 +118,7 @@ void max_pixel(char *image_path) {
     
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            int i = (y * width + x) * channels;
+            int i = (y * width + x) * channel_count;
 
             unsigned char r = image[i];
             unsigned char g = image[i + 1];
@@ -140,11 +140,11 @@ void max_pixel(char *image_path) {
     printf("max_pixel (%d, %d): %d, %d, %d\n", pixel_x, pixel_y, max_r, max_g, max_b);
 }
 
-void min_pixel(char *image_path) {
+void min_pixel(char *source_path) {
     unsigned char *image = NULL;
-    int width = 0, height = 0, channels = 0;
+    int width = 0, height = 0, channel_count = 0;
 
-    read_image_data(image_path, &image, &width, &height, &channels);
+    read_image_data(source_path, &image, &width, &height, &channel_count);
 
     int min_sum = 255 * 3 + 1;
     int pixel_x = 0, pixel_y = 0;
@@ -152,7 +152,7 @@ void min_pixel(char *image_path) {
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            int i = (y * width + x) * channels;
+            int i = (y * width + x) * channel_count;
 
             unsigned char r = image[i];
             unsigned char g = image[i + 1];
@@ -172,4 +172,48 @@ void min_pixel(char *image_path) {
     }
 
     printf("min_pixel (%d, %d): %d, %d, %d\n", pixel_x, pixel_y, min_r, min_g, min_b);
+}
+
+void max_component(char *source_path, char component) {
+    unsigned char *image = NULL;
+    int width = 0, height = 0, channel_count = 0;
+
+    read_image_data(source_path, &image, &width, &height, &channel_count);
+
+    int max_value = -1;
+    int pixel_x = 0, pixel_y = 0;
+
+    if (channel_count < 3) {
+        printf("ERROR: Image does not contain RGB channels.\n");
+        free(image);
+        return;
+    }
+
+    int offset;
+    if (component == 'R') {
+        offset = 0;
+    } else if (component == 'G') {
+        offset = 1;
+    } else if (component == 'B') {
+        offset = 2;
+    } else {
+        printf("ERROR");
+        free(image);
+        return;
+    }
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int index = (y * width + x) * channel_count;
+            unsigned char value = image[index + offset];
+
+            if (value > max_value) {
+                max_value = value;
+                pixel_x = x;
+                pixel_y = y;
+            }
+        }
+    }
+
+    printf("max_component %c (%d, %d): %d\n", component, pixel_x, pixel_y, max_value);
 }
