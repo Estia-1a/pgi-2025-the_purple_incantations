@@ -12,4 +12,5 @@ void rotate_acw(char *source_path);
 void max_pixel(char *source_path);
 void min_pixel(char *source_path);
 void color_red(char *source_path);
+
 #endif
