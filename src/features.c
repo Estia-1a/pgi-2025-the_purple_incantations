@@ -200,3 +200,15 @@ void min_pixel(char *image_path) {
 
     printf("min_pixel (%d, %d): %d, %d, %d\n", pixel_x, pixel_y, min_r, min_g, min_b);
 }
+void color_red(char *source_path){
+    unsigned char *data = NULL;
+    int width=0, height =0, channel_count=0;
+    int i ;
+    read_image_data(source_path, &data, &width, &height, &channel_count);
+    for(i=0; i<channel_count * width * height;i++){
+       if (i%3 != 0){
+        data[i] = 0;
+       }
+    }
+    write_image_data("./images/input/image_out.bmp", data, width, height);
+}
