@@ -155,15 +155,12 @@ void rotate_acw(char *source_path){
     free_image_data(datasrc);
 }
 
-void max_pixel(char *image_path) {
-    
-    unsigned char *image = NULL;  
-    int width = 0, height = 0, channels = 0; 
+void max_pixel(char *source_path) {
+    unsigned char *image = NULL;   
+    int width = 0, height = 0, channel_count = 0; 
 
-    
-    read_image_data(image_path, &image, &width, &height, &channels);
+    read_image_data(source_path, &image, &width, &height, &channel_count);
 
-    
     int max_sum = -1;
     int pixel_x = 0, pixel_y = 0;
     unsigned char max_r = 0, max_g = 0, max_b = 0;
@@ -172,10 +169,8 @@ void max_pixel(char *image_path) {
     
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-          
-            int i = (y * width + x) * channels;
+            int i = (y * width + x) * channel_count;
 
-            
             unsigned char r = image[i];
             unsigned char g = image[i + 1];
             unsigned char b = image[i + 2];
@@ -199,11 +194,11 @@ void max_pixel(char *image_path) {
     printf("max_pixel (%d, %d): %d, %d, %d\n", pixel_x, pixel_y, max_r, max_g, max_b);
 }
 
-void min_pixel(char *image_path) {
+void min_pixel(char *source_path) {
     unsigned char *image = NULL;
-    int width = 0, height = 0, channels = 0;
+    int width = 0, height = 0, channel_count = 0;
 
-    read_image_data(image_path, &image, &width, &height, &channels);
+    read_image_data(source_path, &image, &width, &height, &channel_count);
 
     int min_sum = 255 * 3 + 1;
     int pixel_x = 0, pixel_y = 0;
@@ -211,7 +206,7 @@ void min_pixel(char *image_path) {
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            int i = (y * width + x) * channels;
+            int i = (y * width + x) * channel_count;
 
             unsigned char r = image[i];
             unsigned char g = image[i + 1];
@@ -232,15 +227,47 @@ void min_pixel(char *image_path) {
 
     printf("min_pixel (%d, %d): %d, %d, %d\n", pixel_x, pixel_y, min_r, min_g, min_b);
 }
-void color_red(char *source_path){
-    unsigned char *data = NULL;
-    int width=0, height =0, channel_count=0;
-    int i ;
-    read_image_data(source_path, &data, &width, &height, &channel_count);
-    for(i=0; i<channel_count * width * height;i++){
-       if (i%3 != 0){
-        data[i] = 0;
-       }
+
+void max_component(char *source_path, char component) {
+    unsigned char *image = NULL;
+    int width = 0, height = 0, channel_count = 0;
+
+    read_image_data(source_path, &image, &width, &height, &channel_count);
+
+    int max_value = -1;
+    int pixel_x = 0, pixel_y = 0;
+
+    if (channel_count < 3) {
+        printf("ERROR: Image does not contain RGB channels.\n");
+        free(image);
+        return;
     }
-    write_image_data("./images/input/image_out.bmp", data, width, height);
+
+    int offset;
+    if (component == 'R') {
+        offset = 0;
+    } else if (component == 'G') {
+        offset = 1;
+    } else if (component == 'B') {
+        offset = 2;
+    } else {
+        printf("ERROR");
+        free(image);
+        return;
+    }
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int index = (y * width + x) * channel_count;
+            unsigned char value = image[index + offset];
+
+            if (value > max_value) {
+                max_value = value;
+                pixel_x = x;
+                pixel_y = y;
+            }
+        }
+    }
+
+    printf("max_component %c (%d, %d): %d\n", component, pixel_x, pixel_y, max_value);
 }

@@ -11,6 +11,8 @@ void rotate_cw(char *source_path);
 void rotate_acw(char *source_path);
 void max_pixel(char *source_path);
 void min_pixel(char *source_path);
+void max_component(char *source_path, char component);
+
 void color_red(char *source_path);
 
 #endif
