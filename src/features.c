@@ -116,7 +116,7 @@ void rotate_cw(char *source_path){
         }
     }
 
-    write_image_data("./images/input/image_rotatecw_out.bmp", datadest, new_width, new_height);
+    write_image_data("./images/input/image_out.bmp", datadest, new_width, new_height);
 
     free(datadest);
     free_image_data(datasrc);
@@ -149,7 +149,7 @@ void rotate_acw(char *source_path){
         }
     }
 
-    write_image_data("./images/input/image_rotateacw_out.bmp", datadest, new_width, new_height);
+    write_image_data("./images/input/image_out.bmp", datadest, new_width, new_height);
 
     free(datadest);
     free_image_data(datasrc);
