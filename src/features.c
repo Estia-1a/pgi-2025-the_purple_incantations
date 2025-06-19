@@ -238,7 +238,7 @@ void max_component(char *source_path, char component) {
     int pixel_x = 0, pixel_y = 0;
 
     if (channel_count < 3) {
-        printf("ERROR: Image does not contain RGB channels.\n");
+        printf("ERREUR");
         free(image);
         return;
     }
@@ -251,7 +251,7 @@ void max_component(char *source_path, char component) {
     } else if (component == 'B') {
         offset = 2;
     } else {
-        printf("ERROR");
+        printf("ERREUR");
         free(image);
         return;
     }
@@ -271,6 +271,52 @@ void max_component(char *source_path, char component) {
 
     printf("max_component %c (%d, %d): %d\n", component, pixel_x, pixel_y, max_value);
 }
+
+void min_component(char *source_path, char component) {
+    unsigned char *image = NULL;
+    int width = 0, height = 0, channel_count = 0;
+
+    read_image_data(source_path, &image, &width, &height, &channel_count);
+
+    int min_value = 256;
+    int pixel_x = 0, pixel_y = 0;
+
+    if (channel_count < 3) {
+        printf("ERREUR");
+        free(image);
+        return;
+    }
+
+    int offset;
+
+    if (component == 'R') {
+        offset = 0;
+    } else if (component == 'G') {
+        offset = 1;
+    } else if (component == 'B') {
+        offset = 2;
+    } else {
+        printf("ERREUR");
+        free(image);
+        return;
+    }
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int index = (y * width + x) * channel_count;
+            unsigned char value = image[index + offset];
+
+            if (value < min_value) {
+                min_value = value;
+                pixel_x = x;
+                pixel_y = y;
+            }
+        }
+    }
+
+    printf("min_component %c (%d, %d): %d\n", component, pixel_x, pixel_y, min_value);
+}
+
 void color_red(char *source_path){
     unsigned char *data = NULL;
     int width=0, height =0, channel_count=0;

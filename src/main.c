@@ -50,18 +50,34 @@ int main(int argc, char **argv) {
   if ( strncmp( configuration.command, "max_component", 13 ) == 0 ) {
     max_component(configuration.filenames[0], configuration.arguments[0][0]);
   }
+  if ( strncmp( configuration.command, "min_component", 13 ) == 0 ) {
+    min_component(configuration.filenames[0], configuration.arguments[0][0]);
+  }
 
   if ( strncmp( configuration.command, "rotate_cw", 9 ) == 0 ) {
     rotate_cw(configuration.filenames[0] );
   }
+
   if ( strncmp( configuration.command, "rotate_acw", 10 ) == 0 ) {
     rotate_acw(configuration.filenames[0] );
   }
+
   if ( strncmp( configuration.command, "color_red", 9 ) == 0 ) {
     color_red(configuration.filenames[0]);  
   }
 
   return 0;
 }
-
+void color_red(char *source_path){
+    unsigned char *data = NULL;
+    int width=0, height =0, channel_count=0;
+    int i ;
+    read_image_data(source_path, &data, &width, &height, &channel_count);
+    for(i=0; i<channel_count * width * height;i++){
+       if (i%3 != 0){
+        data[i] = 0;
+       }
+    }
+    write_image_data("./images/input/image_out.bmp", data, width, height);
+}
  
