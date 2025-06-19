@@ -88,7 +88,41 @@ void second_line (char *source_path){
       printf("ERROR!!!!!!");  
     }
 }
+//rotation sens horaire
+void rotate_cw(char *source_path) {
+    unsigned char *datasrc = NULL;
+    int width = 0, height = 0, channel_count = 0;
 
+    if (!read_image_data(source_path, &datasrc, &width, &height, &channel_count)) {
+        fprintf(stderr, "Erreur lors de la lecture de l'image.\n");
+        return;
+    }
+
+    int new_width = height;
+    int new_height = width;
+
+    unsigned char *datadest = malloc(new_width * new_height * channel_count * sizeof(unsigned char));
+    if (!datadest) {
+        fprintf(stderr, "Erreur d'allocation mémoire.\n");
+        free_image_data(datasrc);
+        return;
+    }
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            pixelRGB *pixel = get_pixel(datasrc, width, height, channel_count, x, y);
+            if (pixel) {
+                // Rotation horaire : (x, y) devient (new_x, new_y) = (height - 1 - y, x)
+                set_pixel(datadest, new_width, new_height, channel_count, height - 1 - y, x, pixel);
+            }
+        }
+    }
+
+    write_image_data("./images/input/image_rotatecw_out.bmp", datadest, new_width, new_height);
+
+    free(datadest);
+    free_image_data(datasrc);
+}
 /*rotation sens anti-horaire*/
 void rotate_acw(char *source_path){
     unsigned char *datasrc = NULL;
@@ -117,7 +151,7 @@ void rotate_acw(char *source_path){
         }
     }
 
-    write_image_data("./images/input/image_rotatecw_out.bmp", datadest, new_width, new_height);
+    write_image_data("./images/input/image_rotateacw_out.bmp", datadest, new_width, new_height);
 
     free(datadest);
     free_image_data(datasrc);
