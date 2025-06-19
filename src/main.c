@@ -47,8 +47,14 @@ int main(int argc, char **argv) {
     max_pixel(configuration.filenames[0] );
   }
 
-  if ( strncmp( configuration.command, "rotate_cw", 9 ) == 0 ) {
+  if ( strncmp( configuration.command, "min_pixel", 9 ) == 0 ) {
+    min_pixel(configuration.filenames[0] );
+  }
+
+  if ( strncmp( configuration.command, "rotate_acw", 9 ) == 0 ) {
     rotate_acw(configuration.filenames[0] );
   }
   return 0;
 }
+
+ 
