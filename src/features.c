@@ -111,7 +111,7 @@ void rotate_cw(char *source_path){
         for (int x = 0; x < width; x++) {
             pixelRGB *pixel = get_pixel(datasrc, width, height, channel_count, x, y);
             if (pixel) {
-                set_pixel(datadest, new_width, new_height, channel_count, new_height - 1 - y,x, pixel);
+                set_pixel(datadest, new_width, new_height, channel_count, height - 1 - y,x, pixel);
             }
         }
     }
@@ -144,7 +144,7 @@ void rotate_acw(char *source_path){
         for (int x = 0; x < width; x++) {
             pixelRGB *pixel = get_pixel(datasrc, width, height, channel_count, x, y);
             if (pixel) {
-                set_pixel(datadest, new_width, new_height, channel_count, y, new_height - 1 - x, pixel);
+                set_pixel(datadest, new_width, new_height, channel_count, y, height - 1 - x, pixel);
             }
         }
     }
