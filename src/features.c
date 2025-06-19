@@ -111,7 +111,7 @@ void rotate_cw(char *source_path){
         for (int x = 0; x < width; x++) {
             pixelRGB *pixel = get_pixel(datasrc, width, height, channel_count, x, y);
             if (pixel) {
-                set_pixel(datadest, new_width, new_height, channel_count, new_height - 1 - y,x, pixel);
+                set_pixel(datadest, new_width, new_height, channel_count, height - 1 - y,x, pixel);
             }
         }
     }
@@ -144,7 +144,7 @@ void rotate_acw(char *source_path){
         for (int x = 0; x < width; x++) {
             pixelRGB *pixel = get_pixel(datasrc, width, height, channel_count, x, y);
             if (pixel) {
-                set_pixel(datadest, new_width, new_height, channel_count, y, new_height - 1 - x, pixel);
+                set_pixel(datadest, new_width, new_height, channel_count, y, height - 1 - x, pixel);
             }
         }
     }
@@ -319,13 +319,14 @@ void min_component(char *source_path, char component) {
 
 void color_red(char *source_path){
     unsigned char *data = NULL;
-    int width=0, height =0, channel_count=0;
-    int i ;
+    int width = 0, height = 0, channel_count = 0;
     read_image_data(source_path, &data, &width, &height, &channel_count);
-    for(i=0; i<channel_count * width * height;i++){
-       if (i%3 != 0){
-        data[i] = 0;
-       }
+    
+    for (int i = 0; i < width * height * channel_count; i += channel_count) {
+        // Garder le canal rouge original, supprimer vert et bleu
+        // data[i] reste inchangé (canal rouge)
+        data[i + 1] = 0;   // Green = 0
+        data[i + 2] = 0;   // Blue = 0
     }
     write_image_data("./images/input/image_out.bmp", data, width, height);
 }
