@@ -89,21 +89,20 @@ void second_line (char *source_path){
     }
 }
 //rotation sens horaire
-void rotate_cw(char *source_path) {
+void rotate_cw(char *source_path){
     unsigned char *datasrc = NULL;
     int width = 0, height = 0, channel_count = 0;
 
     if (!read_image_data(source_path, &datasrc, &width, &height, &channel_count)) {
-        fprintf(stderr, "Erreur lors de la lecture de l'image.\n");
+        fprintf(stderr, "Erreur image.\n");
         return;
     }
-
     int new_width = height;
     int new_height = width;
 
     unsigned char *datadest = malloc(new_width * new_height * channel_count * sizeof(unsigned char));
     if (!datadest) {
-        fprintf(stderr, "Erreur d'allocation mémoire.\n");
+        fprintf(stderr, "Erreur mémoire.\n");
         free_image_data(datasrc);
         return;
     }
@@ -112,8 +111,7 @@ void rotate_cw(char *source_path) {
         for (int x = 0; x < width; x++) {
             pixelRGB *pixel = get_pixel(datasrc, width, height, channel_count, x, y);
             if (pixel) {
-                // Rotation horaire : (x, y) devient (new_x, new_y) = (height - 1 - y, x)
-                set_pixel(datadest, new_width, new_height, channel_count, height - 1 - y, x, pixel);
+                set_pixel(datadest, new_width, new_height, channel_count, new_height - 1 - y,x, pixel);
             }
         }
     }
@@ -129,7 +127,7 @@ void rotate_acw(char *source_path){
     int width = 0, height = 0, channel_count = 0;
 
     if (!read_image_data(source_path, &datasrc, &width, &height, &channel_count)) {
-        fprintf(stderr, "Erreur lors de la lecture de l'image.\n");
+        fprintf(stderr, "Erreur image.\n");
         return;
     }
     int new_width = height;
@@ -137,7 +135,7 @@ void rotate_acw(char *source_path){
 
     unsigned char *datadest = malloc(new_width * new_height * channel_count * sizeof(unsigned char));
     if (!datadest) {
-        fprintf(stderr, "Erreur d'allocation mémoire.\n");
+        fprintf(stderr, "Erreur mémoire.\n");
         free_image_data(datasrc);
         return;
     }
