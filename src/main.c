@@ -83,6 +83,10 @@ int main(int argc, char **argv) {
   if ( strncmp( configuration.command, "mirror_vertical", 15) == 0 ) {
     mirror_vertical(configuration.filenames[0]);  
   }
+
+  if ( strncmp( configuration.command, "mirror_total", 15) == 0 ) {
+    mirror_total(configuration.filenames[0]);  
+  }
   return 0;
 }
   
