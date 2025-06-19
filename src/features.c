@@ -384,6 +384,24 @@ void color_green(char *source_path){
     write_image_data("./images/input/image_out.bmp", data, width, height);
 }
 
+void color_blue(char *source_path){
+    unsigned char *data = NULL;
+    int width = 0, height = 0, channel_count = 0;
+    read_image_data(source_path, &data, &width, &height, &channel_count);
+    
+    for (int i = 0; i < width * height * channel_count; i += channel_count) {
+        
+        unsigned char luminance = (unsigned char)(0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]);
+        
+        
+        data[i]     = 0;          
+        data[i + 1] = 0;          
+        data[i + 2] = luminance;  
+    }
+    
+    write_image_data("./images/input/image_out.bmp", data, width, height);
+}
+
 void mirror_vertical(char *source_path){
     unsigned char *datasrc = NULL;
     int width = 0, height = 0, channel_count = 0;
