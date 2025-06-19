@@ -324,9 +324,14 @@ void color_red(char *source_path){
     
     for (int i = 0; i < width * height * channel_count; i += channel_count) {
         
-        data[i + 1] = 0;  
-        data[i + 2] = 0;   
+        unsigned char luminance = (unsigned char)(0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]);
+        
+        
+        data[i]     = luminance;  
+        data[i + 1] = 0;         
+        data[i + 2] = 0;          
     }
+    
     write_image_data("./images/input/image_out.bmp", data, width, height);
 }
 
