@@ -10,7 +10,7 @@
 #include "argsparse.h"
 
 int main(int argc, char **argv) {
- 
+ //test
   Config configuration ;
   parse_arguments( argc, argv, &configuration ) ;
   check_debug_mode(configuration);
