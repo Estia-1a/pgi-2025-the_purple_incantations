@@ -116,7 +116,7 @@ void rotate_cw(char *source_path){
         }
     }
 
-    write_image_data("./images/input/image_out.bmp", datadest, new_width, new_height);
+    write_image_data("image_out.bmp", datadest, new_width, new_height);
 
     free(datadest);
     free_image_data(datasrc);
@@ -149,7 +149,7 @@ void rotate_acw(char *source_path){
         }
     }
 
-    write_image_data("./images/input/image_out.bmp", datadest, new_width, new_height);
+    write_image_data("image_out.bmp", datadest, new_width, new_height);
 
     free(datadest);
     free_image_data(datasrc);
@@ -332,7 +332,7 @@ void color_red(char *source_path){
         data[i + 2] = 0;          
     }
     
-    write_image_data("./images/input/image_out.bmp", data, width, height);
+    write_image_data("image_out.bmp", data, width, height);
 }
 
 void mirror_horizontal(char *source_path){
@@ -361,7 +361,7 @@ void mirror_horizontal(char *source_path){
         }
     }
 
-    write_image_data("./images/input/image_out.bmp", datadest, new_width, new_height);
+    write_image_data("image_out.bmp", datadest, new_width, new_height);
 
     free(datadest);
     free_image_data(datasrc);
@@ -381,7 +381,7 @@ void color_green(char *source_path){
         data[i + 2] = 0;          
     }
    
-    write_image_data("./images/input/image_out.bmp", data, width, height);
+    write_image_data("image_out.bmp", data, width, height);
 }
 
 void color_blue(char *source_path){
@@ -399,7 +399,7 @@ void color_blue(char *source_path){
         data[i + 2] = luminance;  
     }
     
-    write_image_data("./images/input/image_out.bmp", data, width, height);
+    write_image_data("image_out.bmp", data, width, height);
 }
 
 void mirror_vertical(char *source_path){
@@ -430,7 +430,7 @@ void mirror_vertical(char *source_path){
         }
     }
 
-    write_image_data("./images/input/image_out.bmp", datadest, new_width, new_height);
+    write_image_data("image_out.bmp", datadest, new_width, new_height);
 
     free(datadest);
     free_image_data(datasrc);
@@ -451,7 +451,7 @@ void color_gray(char *source_path){
         data[i + 2] = luminance;  
     }
     
-    write_image_data("./images/input/image_out.bmp", data, width, height);
+    write_image_data("image_out.bmp", data, width, height);
 }
 void mirror_total(char *source_path){
     unsigned char *datasrc = NULL;
@@ -481,7 +481,7 @@ void mirror_total(char *source_path){
         }
     }
 
-    write_image_data("./images/input/image_out.bmp", datadest, new_width, new_height);
+    write_image_data("image_out.bmp", datadest, new_width, new_height);
 
     free(datadest);
     free_image_data(datasrc);
